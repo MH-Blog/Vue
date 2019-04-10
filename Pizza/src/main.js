@@ -6,7 +6,7 @@ import axios from 'axios'
 import Bmob from "hydrogen-js-sdk";
 
 // 初始化
-Bmob.initialize("be085c920a6a1bd81be424fbcc0fc32f", "050f90d9d82b345783830b6cb1005cee");
+Bmob.initialize("f3e658d85399255d35b664ae7ffb2e51", "4e577089671125a8886ddefdadf4e007");
 
 // 挂载到全局使用
 Vue.prototype.Bmob = Bmob

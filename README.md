@@ -4,7 +4,7 @@
 - Vue相关：实战源码+博客讲解
 - [个人网站](http://pythonsky.cn/)
 - [CSDN博客](https://blog.csdn.net/hzw6991)
-- 学习交流群【726755931】[![Coder](https://github.com/Jack-Cherish/Pictures/raw/master/qqgroup.png)](https://jq.qq.com/?_wv=1027&k=5vfXUJ0)
+- 学习交流群【726755931】[![image](https://github.com/MH-Blog/Pictures/raw/master/qqgroup.png)](https://jq.qq.com/?_wv=1027&k=5vfXUJ0)
 - 分享技术，乐享生活：【神奇的老黄】公众号每周分享Python 、前端相关教程资源，欢迎您的关注！
 
 

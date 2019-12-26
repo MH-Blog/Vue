@@ -38,13 +38,13 @@ export default {
       list: [
         {
           id: 0,
-          title: "Django模型类Meta元数据详解 - heylucky - 博客园",
+          title: "Django模型类Meta元数据详解",
           link: "https://www.cnblogs.com/yelin/p/6253810.html",
           done: false
         },
         {
           id: 0,
-          title: "Django模型类Meta元数据详解 - heylucky - 博客园",
+          title: "Django模型类Meta元数据详解",
           link: "https://www.cnblogs.com/yelin/p/6253810.html",
           done: false
         }

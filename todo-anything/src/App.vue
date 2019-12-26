@@ -10,28 +10,4 @@
   </div>
 </template>
 
-<style>
-#nav {
-  padding: 10px 0;
-  font-size: 24px;
-  background: rgba(47, 47, 47, 0.98);
-  font-weight: bold;
-  text-align: center;
-  color: #fff;
-}
 
-#nav a {
-  color: #fff;
-  margin: 0 33px;
-}
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-@media screen and (max-width: 600px) {
-  #nav a {
-    color: #fff;
-    margin: 0 5px;
-    font-size: 18px;
-  }
-}
-</style>

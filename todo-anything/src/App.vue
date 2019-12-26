@@ -23,7 +23,6 @@
 #nav a {
   color: #fff;
   margin: 0 33px;
-
 }
 #nav a.router-link-exact-active {
   color: #42b983;
@@ -32,7 +31,7 @@
   #nav a {
     color: #fff;
     margin: 0 5px;
-     font-size: 18px;
+    font-size: 18px;
   }
 }
 </style>

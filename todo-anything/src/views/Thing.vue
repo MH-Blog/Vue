@@ -44,17 +44,19 @@
 export default {
   data() {
     return {
-      list: [],
       inputValue: ""
     };
   },
   computed: {
     todo_list() {
-      return this.list.filter(item => item.done == false);
+      return this.$store.state.thing_list.filter(item => item.done == false);
     },
     done_list() {
-      return this.list.filter(item => item.done == true);
+      return this.$store.state.thing_list.filter(item => item.done == true);
     }
+  },
+  mounted() {
+    this.$store.commit("getThingData");
   },
   methods: {
     // 添加代办事项

@@ -21,7 +21,7 @@
     </section>
     <section>
       <h3>
-        资料类
+        资源类
         <span id="todocount">{{material_list.length}}</span>
       </h3>
       <div class="view">

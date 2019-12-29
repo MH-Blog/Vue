@@ -1,4 +1,4 @@
-import * as types from './mutation-types';
+import setUserInfo from "./mutations";
 // 提交mutation
 function makeAction(type) {
   return ({
@@ -6,5 +6,5 @@ function makeAction(type) {
   }, ...args) => commit(type, ...args);
 }
 
-export const setInfo = makeAction(types.SET_INFO);
+export const setInfo = makeAction(setUserInfo);
 

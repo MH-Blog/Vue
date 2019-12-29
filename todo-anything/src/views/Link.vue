@@ -31,46 +31,27 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
-    return {
-      blog_list: [
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        },
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        },
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        },
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        },
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        },
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        },
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        },
-        {
-          title: "v2ex",
-          link: "v2ex.com"
-        }
-      ],
-      forum_list: [],
-      material_list: []
-    };
+    return {};
+  },
+  computed: {
+    ...mapState({
+      link_list: "link_list"
+    }),
+    blog_list() {
+      return this.link_list.filter(item => item.type == 1);
+    },
+    forum_list() {
+      return this.link_list.filter(item => item.type == 2);
+    },
+    material_list() {
+      return this.link_list.filter(item => item.type == 3);
+    }
+  },
+  mounted() {
+    this.$store.commit("setLinkList");
   }
 };
 </script>

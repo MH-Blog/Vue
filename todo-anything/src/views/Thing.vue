@@ -41,6 +41,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -48,15 +49,18 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      thing_list: "thing_list"
+    }),
     todo_list() {
-      return this.$store.state.thing_list.filter(item => item.done == false);
+      return this.thing_list.filter(item => item.done == false);
     },
     done_list() {
-      return this.$store.state.thing_list.filter(item => item.done == true);
+      return this.thing_list.filter(item => item.done == true);
     }
   },
   mounted() {
-    this.$store.commit("getThingData");
+    this.$store.commit("setThingList");
   },
   methods: {
     // 添加代办事项
@@ -64,12 +68,10 @@ export default {
       if (this.inputValue == "") {
         alert("内容不能为空");
       } else {
-        let todo = {
-          id: this.list.length + 1,
-          title: this.inputValue,
-          done: false
-        };
-        this.list.push(todo);
+        // let todo = {
+        //   title: this.inputValue
+        // };
+        // this.$store.commit("addThingData", todo);
         this.inputValue = "";
       }
     },

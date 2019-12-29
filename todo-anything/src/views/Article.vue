@@ -1,7 +1,5 @@
 <template>
   <div class="main">
-    <!-- 输入框 -->
-
     <!-- 列表区域 -->
     <section>
       <h3>
@@ -32,33 +30,30 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      list: [
-        {
-          id: 0,
-          title: "Django模型类Meta元数据详解",
-          link: "https://www.cnblogs.com/yelin/p/6253810.html",
-          done: false
-        },
-        {
-          id: 0,
-          title: "Django模型类Meta元数据详解",
-          link: "https://www.cnblogs.com/yelin/p/6253810.html",
-          done: false
-        }
-      ],
       inputValue: "好好学习,天天向上"
     };
   },
   computed: {
+    ...mapState({
+      article_list: "article_list"
+    }),
     todo_list() {
-      return this.list.filter(item => item.done == false);
+      return this.article_list.filter(item => item.done == false);
     },
     done_list() {
-      return this.list.filter(item => item.done == true);
+      return this.article_list.filter(item => item.done == true);
     }
+  },
+  mounted() {
+    this.$store.commit("setArticleList");
+    setTimeout(()=>{
+      console.log(this.article_list);
+      
+    },3000)
   },
   methods: {
     // 添加代办事项

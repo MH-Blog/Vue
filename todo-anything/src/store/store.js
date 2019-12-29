@@ -17,9 +17,15 @@ const userInfo = {
     token: cookie.getCookie('token') || ''
 };
 const thing_list = []
+const article_list = []
+const link_list = []
+
+
 const state = {
     userInfo,
-    thing_list
+    thing_list,
+    article_list,
+    link_list
 }
 export default new Vuex.Store({
     state,

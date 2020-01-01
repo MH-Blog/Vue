@@ -19,9 +19,9 @@
       </h3>
       <ul class="todo-list">
         <li class="todo" v-for="(item,index) in todo_list" :key="index">
-          <button class="complete" @click="update(item.id)"></button>
+          <button class="complete" @click="update(item)"></button>
           <label>{{ item.title }}</label>
-          <button class="destroy" @click="remove(item.id)"></button>
+          <button class="destroy" @click="remove(item)"></button>
         </li>
       </ul>
     </section>
@@ -32,20 +32,23 @@
       </h3>
       <ul class="do-list">
         <li class="done" v-for="(item,index) in done_list" :key="index">
-          <button class="complete" @click="update(item.id)"></button>
+          <button class="complete" @click="update(item)"></button>
           <label>{{ item.title }}</label>
-          <button class="destroy" @click="remove(item.id)"></button>
+          <button class="destroy" @click="remove(item)"></button>
         </li>
       </ul>
     </section>
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import { createThing, delThing, updateThing } from "../api/api";
+
 export default {
   data() {
     return {
-      inputValue: ""
+      inputValue: "",
+      removeMsg: "您确定要删除当前事项嘛？"
     };
   },
   computed: {
@@ -63,33 +66,51 @@ export default {
     this.$store.commit("setThingList");
   },
   methods: {
+    ...mapMutations({
+      setThingList: "setThingList"
+    }),
     // 添加代办事项
     addItem() {
       if (this.inputValue == "") {
         alert("内容不能为空");
       } else {
-        // let todo = {
-        //   title: this.inputValue
-        // };
-        // this.$store.commit("addThingData", todo);
-        this.inputValue = "";
+        let todo = { title: this.inputValue };
+        createThing(todo)
+          .then(() => {
+            this.inputValue = "";
+            this.setThingList();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       }
     },
-    update(id) {
-      this.list.some((item, i) => {
-        if (item.id == id) {
-          this.list[i].done = !this.list[i].done;
-          return true;
-        }
-      });
+    update(item) {
+      let that = this;
+      updateThing(item.id, { done: item.done })
+        .then(() => {
+          // 更新store数据
+          that.setThingList();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
-    remove(id) {
-      this.list.some((item, i) => {
-        if (item.id == id) {
-          this.list.splice(i, 1);
-          return true;
-        }
-      });
+    remove(item) {
+      let that = this;
+      if (confirm(that.removeMsg) == true) {
+        delThing(item.id)
+          .then(() => {
+            // 更新store数据
+            that.setThingList();
+          })
+          .catch(function(error) {
+            console.log(error);
+            alert("删除失败");
+          });
+      } else {
+        return false;
+      }
     }
   }
 };

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import './styles/base.scss'
+import '@/assets/css/base.scss'
 
 //全局状态控制引入
 import store from './store/store';

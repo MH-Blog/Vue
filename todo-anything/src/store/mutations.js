@@ -36,6 +36,7 @@ export default {
       });
     }
   },
+  
   // 设置网址导航数据
   setLinkList(state) {
     if (cookie.getCookie('token') != null) {

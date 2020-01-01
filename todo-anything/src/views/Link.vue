@@ -1,5 +1,30 @@
 <template>
   <div class="main">
+    <!-- 输入框 -->
+    <header class="header">
+      <input
+        v-model="inputTitle"
+        autofocus="autofocus"
+        autocomplete="off"
+        placeholder="请输入标题"
+        class="new-todo"
+      />
+      <input
+        v-model="inputLink"
+        @keyup.enter="addItem"
+        autofocus="autofocus"
+        autocomplete="off"
+        placeholder="请输入连接"
+        class="new-todo middle-todo"
+      />
+      <input
+        v-model="inputType"
+        autofocus="autofocus"
+        autocomplete="off"
+        placeholder="请输入类型"
+        class="new-todo"
+      />
+    </header>
     <!-- 列表区域 -->
     <section>
       <h3>
@@ -31,10 +56,15 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { createLink } from "../api/api";
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      inputTitle: "",
+      inputLink: "",
+      inputType: ""
+    };
   },
   computed: {
     ...mapState({
@@ -51,34 +81,72 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit("setLinkList");
+    this.setLinkList();
+  },
+  methods: {
+    ...mapMutations({
+      setLinkList: "setLinkList"
+    }),
+    // 添加待读文章
+    addItem() {
+      if (this.inputTitle == "" || this.inputLink == "") {
+        alert("内容不能为空");
+      } else {
+        let todo = {
+          title: this.inputTitle,
+          link: this.inputLink,
+          type: this.inputType
+        };
+        createLink(todo)
+          .then(() => {
+            this.inputTitle = "";
+            this.inputLink = "";
+            this.inputType = "";
+            this.setLinkList();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+    }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="stylus" scoped>
 .view {
   display: flex;
-  margin: 0 10px;
   font-size: 18px;
   flex-wrap: wrap;
   justify-content: left;
+
   a {
     color: #000;
-    // flex: 1;
-    max-width: 80px;
+    max-width: 100px;
     min-width: 40px;
     height: 32px;
     text-align: center;
     line-height: 32px;
     background: #fff;
     position: relative;
-    margin: 0 5px 10px;
-    padding: 0 5px;
+    margin: 0 5px 10px 0;
+    padding: 0 10px;
     border-radius: 3px;
     border-left: 5px solid #629a9c;
     border-right: 5px solid #629a9c;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+  }
+}
+
+.header {
+  overflow: hidden;
+
+  .new-todo {
+    width: 32%;
+  }
+
+  .middle-todo {
+    margin: 0 2%;
   }
 }
 </style>

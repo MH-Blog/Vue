@@ -1,16 +1,17 @@
 <template>
   <div class="main">
     <Login v-if="userInfo.username == ''"></Login>
-    <div v-else>
-      <p>{{userInfo.username}}</p>
-      <button @click="logout">退出</button>
+    <div v-else class="header">
+      <p class="username">欢迎您，{{userInfo.username}}</p>
+      <button class="logout" @click="logout">退出</button>
     </div>
+    <div></div>
   </div>
 </template>
 <script>
 import cookie from "../static/js/cookie";
 import { mapState } from "vuex";
-import Login from "../views/Login";
+import Login from "../views/User/Login";
 export default {
   data() {
     return {};
@@ -35,3 +36,8 @@ export default {
   }
 };
 </script>
+<style lang="stylus" scoped>
+.header{
+
+}
+</style>

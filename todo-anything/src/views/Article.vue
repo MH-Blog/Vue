@@ -1,5 +1,23 @@
 <template>
   <div class="main">
+    <!-- 输入框 -->
+    <header class="header">
+      <input
+        v-model="inputTitle"
+        autofocus="autofocus"
+        autocomplete="off"
+        placeholder="请输入标题"
+        class="new-todo left-todo"
+      />
+      <input
+        v-model="inputLink"
+        @keyup.enter="addItem"
+        autofocus="autofocus"
+        autocomplete="off"
+        placeholder="请输入连接"
+        class="new-todo right-todo"
+      />
+    </header>
     <!-- 列表区域 -->
     <section>
       <h3>
@@ -8,9 +26,9 @@
       </h3>
       <ul class="todo-list">
         <li class="todo" v-for="(item,index) in todo_list" :key="index">
-          <button class="complete" @click="update(item.id)"></button>
-          <a :href="item.link">{{ item.title }}</a>
-          <button class="destroy" @click="remove(item.id)"></button>
+          <button class="complete" @click="update(item)"></button>
+          <a :href="item.link" target="_blank">{{ item.title }}</a>
+          <button class="destroy" @click="remove(item)"></button>
         </li>
       </ul>
     </section>
@@ -21,20 +39,24 @@
       </h3>
       <ul class="do-list">
         <li class="done" v-for="(item,index) in done_list" :key="index">
-          <button class="complete" @click="update(item.id)"></button>
-          <label>{{ item.title }}</label>
-          <button class="destroy" @click="remove(item.id)"></button>
+          <button class="complete" @click="update(item)"></button>
+          <a :href="item.link" target="_blank">{{ item.title }}</a>
+          <button class="destroy" @click="remove(item)"></button>
         </li>
       </ul>
     </section>
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import { createArticle, updateArticle, delArticle } from "../api/api";
+
 export default {
   data() {
     return {
-      inputValue: "好好学习,天天向上"
+      inputTitle: "",
+      inputLink: "",
+      removeMsg: "您确定要删除当前事项嘛？"
     };
   },
   computed: {
@@ -49,44 +71,75 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit("setArticleList");
-    setTimeout(()=>{
-      console.log(this.article_list);
-      
-    },3000)
+    this.setArticleList();
   },
   methods: {
-    // 添加代办事项
+    ...mapMutations({
+      setArticleList: "setArticleList"
+    }),
+    // 添加待读文章
     addItem() {
-      if (this.inputValue == "") {
+      if (this.inputTitle == "" || this.inputLink == "") {
         alert("内容不能为空");
       } else {
-        let todo = {
-          id: this.list.length + 1,
-          title: this.inputValue,
-          link: "",
-          done: false
-        };
-        this.list.push(todo);
-        this.inputValue = "";
+        let todo = { title: this.inputTitle, link: this.inputLink };
+        createArticle(todo)
+          .then(() => {
+            this.inputTitle = "";
+            this.inputLink = "";
+            this.setArticleList();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       }
     },
-    update(id) {
-      this.list.some((item, i) => {
-        if (item.id == id) {
-          this.list[i].done = !this.list[i].done;
-          return true;
-        }
-      });
+    update(item) {
+      let that = this;
+      updateArticle(item.id, { done: item.done })
+        .then(() => {
+          // 更新store数据
+          that.setArticleList();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
-    remove(id) {
-      this.list.some((item, i) => {
-        if (item.id == id) {
-          this.list.splice(i, 1);
-          return true;
-        }
-      });
+    remove(item) {
+      let that = this;
+      if (confirm(that.removeMsg) == true) {
+        delArticle(item.id)
+          .then(() => {
+            // 更新store数据
+            that.setArticleList();
+            alert("删除成功");
+          })
+          .catch(function(error) {
+            console.log(error);
+            alert("删除失败");
+          });
+      } else {
+        return false;
+      }
     }
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+.header {
+  overflow: hidden;
+
+  .new-todo {
+    width: 48%;
+  }
+
+  .left-todo {
+    float: left;
+  }
+
+  .right-todo {
+    float: right;
+  }
+}
+</style>

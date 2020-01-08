@@ -80,8 +80,8 @@ export default {
             this.inputValue = "";
             this.setThingList();
           })
-          .catch(function(error) {
-            console.log(error);
+          .catch(() => {
+            alert("添加失败");
           });
       }
     },
@@ -92,8 +92,8 @@ export default {
           // 更新store数据
           that.setThingList();
         })
-        .catch(function(error) {
-          console.log(error);
+        .catch(() => {
+          alert("更新失败");
         });
     },
     remove(item) {
@@ -104,8 +104,7 @@ export default {
             // 更新store数据
             that.setThingList();
           })
-          .catch(function(error) {
-            console.log(error);
+          .catch(() => {
             alert("删除失败");
           });
       } else {

@@ -28,7 +28,7 @@ a {
     color: #42b983;
 }
 
-.main {  
+.main {
     margin: 10px auto;
     max-width: 600px;
 
@@ -161,13 +161,96 @@ a {
         }
 
         header input {
-            width: 80%;
+            width: 99%;
         }
     }
 
     #nav a {
         color: #fff;
-        margin: 0 5px;
+        margin: 0 15px;
         font-size: 18px;
     }
+
+    .login-view {
+        width: 300px;
+        height: 480px;
+        border: 1px solid #fff;
+        border-radius: 20px;
+        margin: 50px auto;
+
+        .login-logo {
+            width: 104px;
+            height: 104px;
+            margin: 30px auto 30px;
+            background: url('../../assets/images/login.png') 0 0 no-repeat;
+        }
+
+        .form-item {
+            position: relative;
+            width: 260px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+
+            input {
+                width: 180px;
+                height: 48px;
+                padding-left: 70px;
+                border: 1px solid #fff;
+                border-radius: 25px;
+                font-size: 18px;
+                color: #fff;
+                background-color: transparent;
+                outline: none;
+            }
+
+            #username {
+                background: url('../../assets/images/emil.png') 20px 14px no-repeat;
+            }
+
+            #password {
+                background: url('../../assets/images/password.png') 23px 11px no-repeat;
+            }
+
+            .login-btn {
+                width: 260px;
+                height: 50px;
+                border: 0;
+                border-radius: 25px;
+                font-size: 18px;
+                color: #1f6f4a;
+                outline: none;
+                cursor: pointer;
+                background-color: #fff;
+            }
+        }
+
+        .reg-bar {
+            width: 280px;
+            margin: 20px auto 0;
+            font-size: 14px;
+            overflow: hidden;
+
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .reg {
+                float: left;
+            }
+
+            .forget {
+                float: right;
+            }
+        }
+
+        .tip {
+            position: absolute;
+            left: 20px;
+            top: 42px;
+            font-size: 14px;
+            color: #f50;
+        }
+    }
+
 }

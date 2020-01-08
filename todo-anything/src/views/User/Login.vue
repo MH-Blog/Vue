@@ -2,19 +2,26 @@
   <div class="login-view">
     <div class="login-logo"></div>
     <div class="form-item">
-      <input id="username" v-model="userName" type="text" autocomplete="off" placeholder="邮箱" />
+      <input id="username" style="" v-model="userName" type="text" autocomplete="off" placeholder="邮箱" />
       <p class="tip" v-if="userNameError">请输入合法的邮箱地址</p>
     </div>
     <div class="form-item">
-      <input id="password" v-model="passWord" type="password" autocomplete="off" placeholder="登录密码" @click="loginBtn" />
-      <p class="tip" v-if="passWordError">邮箱或密码不正确</p>
+      <input
+        id="password"
+        v-model="passWord"
+        type="password"
+        autocomplete="off"
+        placeholder="登录密码"
+        @keyup.enter="loginBtn"
+      />
+      <p class="tip" v-if="parseWordError">邮箱或密码不正确</p>
     </div>
     <div class="form-item">
       <button class="login-btn" @click="loginBtn">登 录</button>
     </div>
     <div class="reg-bar">
-      <a class="reg" href="javascript:">立即注册</a>
-      <a class="forget" href="javascript:">忘记密码</a>
+      <router-link to="/register" class="reg">立即注册</router-link>
+      <router-link to="/forget" class="forget">忘记密码</router-link>
     </div>
   </div>
 </template>
@@ -46,23 +53,16 @@ export default {
           this.$router.push({ name: "thing" });
         })
         .catch(function(error) {
-          if ("username" in error) {
-            that.userNameError = true;
-          }
-          if ("password" in error) {
-            that.parseWordError = true;
+          if ("non_field_errors" in error) {
+            alert("账号或密码不正确");
+          } else if ("username" in error) {
+            alert("账号不正确");
+          } else if ("password" in error) {
+            alert("密码不正确");
           }
         });
     }
   }
-  // created() {
-  //   //清除缓存
-  //   cookie.delCookie("token");
-  //   cookie.delCookie("name");
-  //   //重新触发store
-  //   //更新store数据
-  //   this.$store.dispatch("setInfo");
-  // }
 };
 </script>
 <style lang="stylus" scoped>
@@ -120,7 +120,7 @@ export default {
   }
 
   .reg-bar {
-    width: 360px;
+    width: 280px;
     margin: 20px auto 0;
     font-size: 14px;
     overflow: hidden;
@@ -145,6 +145,90 @@ export default {
     top: 42px;
     font-size: 14px;
     color: #f50;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .login-view {
+    width: 300px;
+    height: 480px;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    margin: 50px auto;
+
+    .login-logo {
+      width: 104px;
+      height: 104px;
+      margin: 30px auto 30px;
+      background: url('../../assets/images/login.png') 0 0 no-repeat;
+    }
+
+    .form-item {
+      position: relative;
+      width: 260px;
+      margin: 0 auto;
+      padding-bottom: 30px;
+
+      input {
+        width: 180px;
+        height: 48px;
+        padding-left: 70px;
+        border: 1px solid #fff;
+        border-radius: 25px;
+        font-size: 18px;
+        color: #fff;
+        background-color: transparent;
+        outline: none;
+      }
+
+      #username {
+        background: url('../../assets/images/emil.png') 20px 14px no-repeat;
+      }
+
+      #password {
+        background: url('../../assets/images/password.png') 23px 11px no-repeat;
+      }
+
+      .login-btn {
+        width: 260px;
+        height: 50px;
+        border: 0;
+        border-radius: 25px;
+        font-size: 18px;
+        color: #1f6f4a;
+        outline: none;
+        cursor: pointer;
+        background-color: #fff;
+      }
+    }
+
+    .reg-bar {
+      width: 280px;
+      margin: 20px auto 0;
+      font-size: 14px;
+      overflow: hidden;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .reg {
+        float: left;
+      }
+
+      .forget {
+        float: right;
+      }
+    }
+
+    .tip {
+      position: absolute;
+      left: 20px;
+      top: 42px;
+      font-size: 14px;
+      color: #f50;
+    }
   }
 }
 </style>

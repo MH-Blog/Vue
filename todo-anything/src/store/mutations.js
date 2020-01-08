@@ -12,7 +12,6 @@ export default {
       username: cookie.getCookie('username'),
       token: cookie.getCookie('token')
     }
-    console.log(state.userInfo);
   },
   // 设置待办事项数据
   setThingList(state) {
@@ -20,9 +19,7 @@ export default {
       getThing().then((response) => {
         // 更新store数据
         state.thing_list = response.data;
-      }).catch(function (error) {
-        console.log(error);
-      });
+      }).catch(() => {});
     }
   },
   // 设置文章清单数据
@@ -31,21 +28,17 @@ export default {
       getArticle().then((response) => {
         // 更新store数据
         state.article_list = response.data;
-      }).catch(function (error) {
-        console.log(error);
-      });
+      }).catch(() => {});
     }
   },
-  
+
   // 设置网址导航数据
   setLinkList(state) {
     if (cookie.getCookie('token') != null) {
       getLink().then((response) => {
         // 更新store数据
         state.link_list = response.data;
-      }).catch(function (error) {
-        console.log(error);
-      });
+      }).catch(() => {});
     }
   },
 }

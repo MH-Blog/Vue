@@ -90,7 +90,7 @@ export default {
             this.setArticleList();
           })
           .catch(function(error) {
-            console.log(error);
+            alert(error);
           });
       }
     },
@@ -101,8 +101,8 @@ export default {
           // 更新store数据
           that.setArticleList();
         })
-        .catch(function(error) {
-          console.log(error);
+        .catch(() => {
+          alert("更新失败");
         });
     },
     remove(item) {
@@ -114,8 +114,7 @@ export default {
             that.setArticleList();
             alert("删除成功");
           })
-          .catch(function(error) {
-            console.log(error);
+          .catch(() => {
             alert("删除失败");
           });
       } else {

@@ -11,7 +11,6 @@
       />
       <input
         v-model="inputLink"
-        @keyup.enter="addItem"
         autofocus="autofocus"
         autocomplete="off"
         placeholder="请输入连接"
@@ -23,6 +22,7 @@
         autocomplete="off"
         placeholder="请输入类型"
         class="new-todo"
+        @keyup.enter="addItem"
       />
     </header>
     <!-- 列表区域 -->
@@ -104,8 +104,8 @@ export default {
             this.inputType = "";
             this.setLinkList();
           })
-          .catch(function(error) {
-            console.log(error);
+          .catch(()=> {
+            alert("添加失败")
           });
       }
     }
@@ -129,7 +129,7 @@ export default {
     line-height: 32px;
     background: #fff;
     position: relative;
-    margin: 0 5px 10px 0;
+    margin: 0 5px 10px 10px;
     padding: 0 10px;
     border-radius: 3px;
     border-left: 5px solid #629a9c;

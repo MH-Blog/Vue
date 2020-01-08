@@ -30,14 +30,14 @@ axios.interceptors.response.use(
                 //  path: '/app/login',
                 //  query: {redirect: router.currentRoute.fullPath}
                 //})
-                console.log('未登录 或者token过期');
+                alert('未登录 或者token过期');
                 break;
             case 403:
-                console.log('您没有该操作权限');
+                alert('您没有该操作权限');
                 // alert('您没有该操作权限');
                 break;
             case 500:
-                console.log('服务器错误');
+                alert('服务器错误');
                 // alert('服务器错误');
         }
         return Promise.reject(error.response.data) // 返回接口返回的错误信息

@@ -1,17 +1,16 @@
 <template>
   <div class="main">
     <Login v-if="!userInfo.token"></Login>
-    <div v-else class="header">
-      <p class="username">欢迎您，{{userInfo.username}}</p>
-      <button class="logout" @click="logout">退出</button>
+    <div v-else>
+      <UserCenter></UserCenter>
     </div>
-    <div></div>
   </div>
 </template>
 <script>
 import cookie from "../static/js/cookie";
 import { mapState } from "vuex";
 import Login from "../views/User/Login";
+import UserCenter from "../views/User/UserCenter";
 export default {
   data() {
     return {};
@@ -23,7 +22,8 @@ export default {
     };
   },
   components: {
-    Login
+    Login,
+    UserCenter
   },
   computed: {
     ...mapState({

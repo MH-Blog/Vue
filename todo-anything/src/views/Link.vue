@@ -28,29 +28,47 @@
     <!-- 列表区域 -->
     <section>
       <h3>
-        博客类
-        <span id="todocount">{{blog_list.length}}</span>
+        技术文档
+        <span id="todocount">{{ blog_list.length }}</span>
       </h3>
       <div class="view">
-        <a :href="item.link" v-for="(item,index) in blog_list" :key="index">{{item.title}}</a>
+        <a
+          :href="item.link"
+          v-for="(item, index) in blog_list"
+          :key="index"
+          target="_blank"
+          >{{ item.title }}</a
+        >
       </div>
     </section>
     <section>
       <h3>
-        论坛类
-        <span id="todocount">{{forum_list.length}}</span>
+        技术博客
+        <span id="todocount">{{ forum_list.length }}</span>
       </h3>
       <div class="view">
-        <a :href="item.link" v-for="(item,index) in forum_list" :key="index">{{item.title}}</a>
+        <a
+          :href="item.link"
+          v-for="(item, index) in forum_list"
+          :key="index"
+          target="_blank"
+          >{{ item.title }}</a
+        >
       </div>
     </section>
     <section>
       <h3>
-        资源类
-        <span id="todocount">{{material_list.length}}</span>
+        技术论坛
+        <span id="todocount">{{ material_list.length }}</span>
       </h3>
       <div class="view">
-        <a :href="item.link" v-for="(item,index) in material_list" :key="index">{{item.title}}</a>
+        <a
+          :href="item.link"
+          v-for="(item, index) in material_list"
+          :key="index"
+          target="_blank"
+          >{{ item.title }}</a
+        >
       </div>
     </section>
   </div>
@@ -104,8 +122,8 @@ export default {
             this.inputType = "";
             this.setLinkList();
           })
-          .catch(()=> {
-            alert("添加失败")
+          .catch(() => {
+            alert("添加失败");
           });
       }
     }
@@ -122,7 +140,6 @@ export default {
 
   a {
     color: #000;
-    max-width: 100px;
     min-width: 40px;
     height: 32px;
     text-align: center;

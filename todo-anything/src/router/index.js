@@ -22,24 +22,24 @@ const routes = [{
   {
     path: '/user',
     name: 'user',
-    component: () => import('../views/User.vue'),
-    children: [{
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/User/Login.vue')
-    }, {
-      path: '/register',
-      name: 'register',
-      component: () => import('../views/User/Register.vue')
-    }, {
-      path: '/forget',
-      name: 'forget',
-      component: () => import('../views/User/Forget.vue')
-    }, {
-      path: '/usercenter',
-      name: 'usercenter',
-      component: () => import('../views/User/UserCenter.vue')
-    }]
+    component: () => import('../views/User.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/User/Login.vue')
+  }, {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/User/Register.vue')
+  }, {
+    path: '/forget',
+    name: 'forget',
+    component: () => import('../views/User/Forget.vue')
+  }, {
+    path: '/usercenter',
+    name: 'usercenter',
+    component: () => import('../views/User/UserCenter.vue')
   },
 
   {

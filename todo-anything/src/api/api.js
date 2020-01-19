@@ -16,7 +16,10 @@ if (DEBUG) {
 export const login = params => {
     return axios.post(`${host}/login/`, params)
 }
-
+// 获取验证码
+export const getCode = params => {
+    return axios.post(`${host}/code/`, params)
+}
 //注册
 export const register = parmas => {
     return axios.post(`${host}/users/`, parmas)
@@ -79,3 +82,11 @@ export const createLink = params => {
 export const updateLink = (linkId, params) => {
     return axios.patch(`${host}/link/` + linkId + '/', params)
 }
+
+
+//获取用户信息
+export const getUserDetail = () => { return axios.get(`${host}/users/1/`) }
+
+//修改用户信息
+export const updateUserInfo = params => { return axios.patch(`${host}/users/1/`, params) }
+
